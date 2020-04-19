@@ -20,6 +20,7 @@ public class MainVerticle extends AbstractVerticle {
     Router router = Router.router(vertx);
     router.route().handler(BodyHandler.create());
     connector.create("https://www.kry.se", "UNKNOWN", null);
+    connector.create("https://www.google.com/", "UNKNOWN", null);
     vertx.setPeriodic(1000 * 60, timerId -> poller.pollServices(connector));
     setRoutes(router);
     vertx

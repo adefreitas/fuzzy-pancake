@@ -54,11 +54,14 @@ public class DBConnector {
     return queryResultFuture;
   }
 
-  public Future<ResultSet> getByUrl(String url) {
+  public Future<ResultSet> updateStatusByUrl(String url, String status) {
     if(url == null || url.isEmpty()) {
       return Future.failedFuture("URL is null or empty");
     }
-    return this.query("SELECT * FROM service WHERE url = ?;", new JsonArray().add(url));
+    if (status == null || status.isEmpty()) {
+      return Future.failedFuture("Status is null or empty");
+    }
+    return this.query("UPDATE service SET status = ? WHERE url = ?;", new JsonArray().add(status).add(url));
   }
 
   public Future<ResultSet> deleteByUrl(String url) {
