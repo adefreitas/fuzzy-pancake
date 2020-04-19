@@ -1,0 +1,62 @@
+body, h1 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  font-weight: 500;
+}
+
+.list-group-item .btn {
+  float: right;
+}
+
+.badge {
+  margin: 0 15px;
+}
+
+.notification {
+  width: 250px;
+  position: relative;
+  height: 60px;
+  -webkit-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.24);
+  -moz-box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.24);
+  box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.24);
+  top: 25px;
+  right: 0px;
+  padding: 15px;
+  text-align: center;
+  opacity: 1;
+  -webkit-transition: opacity 1.5s;
+  -moz-transition: opacity 1.5s;
+  -o-transition: opacity 1.5s;
+  transition: opacity 1.5s;
+}
+
+.notification.fade {
+  opacity: 0;
+}
+
+#notification-container {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 250px;
+}
+
+.notification.error {
+ opacity: 1,
+}
+
+.notification.success {
+  opacity: 1;
+}
+
+#kry-logo {
+  display: block;
+  width: 20%;
+  margin: 50px auto;
+}
+
+#service-form {
+  margin: 50px auto;
+}

@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Welcome to KRY</title>
+    <link rel="icon" type="image/png" href="https://www.kry.se/img/meta-icons/favicon-196x196.png" sizes="196x196">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,200&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="static/style.css">
 </head>
-<body>
-KRY status poller
-<ul id="service-list">
-</ul>
-<input type="text" id="url-name">
-<button id="post-service">Save</button>
 
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <img id="kry-logo" src="https://www.kry.se/img/kry-logo.svg">
+                <h1 class="text-center">Status poller</h1>
+            </div>
+            <div class="col-md-6 offset-md-3">
+                <ul id="service-list" class="list-group">
+                </ul>
+            </div>
+        </div>
+        <div class="row" id="service-form">
+            <div class="col-xs-12 col-md-4 offset-md-4">
+                <div>
+                    <h1 class="text-center"></h1>
+                    <form>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" id="url" placeholder="URL">
+                        </div>
+                        <button id="submit-service-form" type="button" class="btn btn-info btn-block">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="notification-container">   
+        </div>
+    </div>
 </body>
-<script src="static/code.js">
-</script>
+<script src="static/code.js"></script>
 </html>
