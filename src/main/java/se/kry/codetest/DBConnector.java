@@ -47,28 +47,41 @@ public class DBConnector {
 
         queryResultFuture.fail(result.cause());
       } else {
-        System.err.println("Success fetching results");
+        System.out.println("Success fetching results");
         queryResultFuture.complete(result.result());
       }
     });
     return queryResultFuture;
   }
 
-  public Future<ResultSet> updateStatusByUrl(String url, String status) {
+  public Future<ResultSet> deleteById(Integer id) {
+    if(id == null ) {
+      return Future.failedFuture("ID is null");
+    }
+    return this.query("DELETE FROM service WHERE id = ?;", new JsonArray().add(id));
+  }
+
+  public Future<ResultSet> getById(Integer id) {
+    if(id == null) {
+      return Future.failedFuture("id is null or empty");
+    }
+    return this.query("SELECT TOP 1 * FROM service WHERE id = ?;", new JsonArray().add(id));
+  }
+
+  public Future<ResultSet> updateById(Integer id, String name, String url, String status) {
+    if (id == null) {
+      return Future.failedFuture("ID is null");
+    }
+    if(name == null || name.isEmpty()) {
+      return Future.failedFuture("Name is null or empty");
+    }
     if(url == null || url.isEmpty()) {
       return Future.failedFuture("URL is null or empty");
     }
     if (status == null || status.isEmpty()) {
       return Future.failedFuture("Status is null or empty");
     }
-    return this.query("UPDATE service SET status = ? WHERE url = ?;", new JsonArray().add(status).add(url));
-  }
-
-  public Future<ResultSet> deleteByUrl(String url) {
-    if(url == null || url.isEmpty()) {
-      return Future.failedFuture("URL is null or empty");
-    }
-    return this.query("DELETE FROM service WHERE url = ?;", new JsonArray().add(url));
+    return this.query("UPDATE service SET url = ?, status = ?, name = ? WHERE id = ?;", new JsonArray().add(url).add(status).add(name).add(id));
   }
 
   public Future<ResultSet> create(String url, String status, String name) {
@@ -81,7 +94,7 @@ public class DBConnector {
             "INSERT INTO service (url, name, status, added_at) values (?, ?, ?, ?);",
             new JsonArray()
                     .add(url)
-                    .add(name != null ? name : "")
+                    .add(name)
                     .add(status)
                     .add(new Date().toString()));
   }

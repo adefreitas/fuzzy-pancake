@@ -17,6 +17,8 @@ public class BackgroundPoller {
         List<JsonObject> jsonServices = handler.result().getRows();
         jsonServices.forEach((service) -> {
           String serviceUrl = service.getString("url");
+          String serviceName = service.getString("name");
+          Integer id = service.getInteger("id");
           String status = "UNKNOWN";
           try {
             URL serviceAddress = new URL(serviceUrl);
@@ -25,6 +27,7 @@ public class BackgroundPoller {
             connection.setConnectTimeout(5000);
             connection.connect();
             status = connection.getResponseCode() < 300 ? "AVAILABLE" : "UNAVAILABLE";
+            connection.disconnect();
           } catch (MalformedURLException e) {
             e.printStackTrace();
           } catch (ProtocolException e) {
@@ -32,7 +35,7 @@ public class BackgroundPoller {
           } catch (IOException e) {
             e.printStackTrace();
           }
-          connector.updateStatusByUrl(serviceUrl, status);
+          connector.updateById(id, serviceName, serviceUrl, status);
         });
       } else {
         System.out.println("BackgroundPoller: Couldn't connect to the DB");
